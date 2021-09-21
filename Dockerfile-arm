@@ -1,0 +1,53 @@
+FROM node:14-bullseye
+
+ENV SITESPEED_IO_BROWSERTIME__XVFB true
+ENV SITESPEED_IO_BROWSERTIME__DOCKER true
+ENV SITESPEED_IO_BROWSERTIME__CHROME__CHROMEDRIVER_PATH=/usr/bin/chromedriver
+ENV SITESPEED_IO_BROWSERTIME__FIREFOX__GECKODRIVER_PATH=/usr/bin/geckodriver
+#ENV FIREFOX_VERSION 92.0
+#ENV CHROMIUM_VERSION 92.*
+
+# Install Visual Metrics dependencies
+RUN apt-get update -y && apt-get install -y imagemagick ffmpeg
+RUN apt-get install -y python3-dev python3-pip python-is-python3
+RUN python -m pip install pyssim
+# Install xvfb
+RUN apt-get install -y xvfb
+# Net-tools for throttling your connection
+RUN apt-get install -y net-tools iproute2 sudo
+
+RUN apt-get update -qqy \
+  && apt-get -qqy install chromium\
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+
+RUN apt-get update -qqy \
+  && apt-get -qqy install chromium-driver \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+
+RUN apt-get update -qqy \
+  && apt-get -qqy install firefox-esr libavcodec-extra \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+
+ RUN curl http://ports.ubuntu.com/pool/universe/f/firefox/firefox-geckodriver_75.0+build3-0ubuntu1_arm64.deb | dpkg-deb --fsys-tarfile - | tar -C / -x ./usr/bin/geckodriver; 
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY package.* /usr/src/app/
+RUN npm install --production
+COPY . /usr/src/app
+
+COPY docker/scripts/start-arm.sh /start.sh
+
+## This is to avoid click the OK button
+RUN mkdir -m 0750 /root/.android
+ADD docker/adb/insecure_shared_adbkey /root/.android/adbkey
+ADD docker/adb/insecure_shared_adbkey.pub /root/.android/adbkey.pub
+
+# Allow all users to run commands needed by sitespeedio/throttle via sudo
+# See https://github.com/sitespeedio/throttle/blob/main/lib/tc.js
+RUN echo 'ALL ALL=NOPASSWD: /usr/sbin/tc, /usr/sbin/route, /usr/sbin/ip' > /etc/sudoers.d/tc
+
+ENTRYPOINT ["/start.sh"]
+VOLUME /sitespeed.io
+WORKDIR /sitespeed.io
