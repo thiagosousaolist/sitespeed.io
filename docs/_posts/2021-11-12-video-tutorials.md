@@ -10,17 +10,16 @@ nav: blog
 ---
 
 # Video tutorials
-For a couple of years we have had a couple of short video tutorials that Jonathan and me (Peter) has made. We gonna redo them and we feel that now is the time for you to help us make more and better tutorials! 
+For a couple of years we have had a couple of short video tutorials and we feel shoud have more of these! Help us to make them better and make it easier for users to use sitespeed.io!
 
-A couple of things:
+We want (short) video tutorials from you on how to use sitespeed.io:
+* Choose a [topic from the list](#topics-to-cover) or come up with a new one
 * Make the tutorial in English
 * If you want to sync with us first or need help with your setup, you can talk to us on [our Slack channel](https://sitespeedio.herokuapp.com) or in a [GitHub issue](https://github.com/sitespeedio/sitespeed.io/issues/new).
 * Follow our [code of conduct](https://github.com/sitespeedio/sitespeed.io/blob/main/CODE_OF_CONDUCT.md).
-* We need the original video (how to share it?)
+* Share the original video with us.
 
 ## What's in it for you?
-You will make it easier for people to use sitespeed.io. Sitespeed.io is open source, free, we believe in privacy, and ...
-
 You will get a special sticker pack with one exclusive sitespeed.io sticker!
 
 Here's an exmaple of some of our stickers:
@@ -29,7 +28,7 @@ Here's an exmaple of some of our stickers:
 {: .img-thumbnail}
 
 
-And we also have a special new sticker that we will only send to to people who contribute with a video:
+And we also have a special secret new sticker that only will be available to people who contribute with a video:
 
 ![New sitespeed.io sticker]({{site.baseurl}}/img/who.png)
 {: .img-thumbnail}
@@ -53,7 +52,6 @@ Here's a couple of examples of areas that could be covered:
 * Anything that we have in the [documentation](https://www.sitespeed.io/documentation/sitespeed.io/)
 
 Anything that you miss? Please let us know on Slack on [Slack](https://sitespeedio.herokuapp.com) or in a [GitHub issue](https://github.com/sitespeedio/sitespeed.io/issues/new).
-
 
 
 /Peter & Jonathan
